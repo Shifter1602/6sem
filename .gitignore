@@ -1,6 +1,3 @@
-#SDF
-*.sdf
-
 # Compiled Object files
 *.slo
 *.lo
