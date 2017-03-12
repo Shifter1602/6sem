@@ -1,6 +1,0 @@
-﻿  main.cpp
-main.cpp(44): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-main.cpp(48): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-  Generating code
-  Finished generating code
-  list.vcxproj -> C:\Users\N750\Documents\Visual Studio 2010\Projects\list\Release\list.exe
