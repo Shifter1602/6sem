@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <conio.h>
 using namespace std;
 
@@ -21,16 +22,30 @@ void show(Form *pbeg);
 char* get_sex(sex s);
 char* get_edu(edu e);
 char* get_ans(ans a);
+int count(Form *pbeg,int age,sex s,edu e,ans *a); 
 
 int main()
 	{
-	ans a1[] = {yes,no,yes,no};
-	ans a2[] = {no,yes,yes,no};
-	Form *pbeg = create_list(12,male,start,a1);
+	char buff[50];
+	ifstream data;
+	data.open("questions.txt");
+	while(!data.eof())
+	{
+	data.getline(buff,50);
+	cout << buff << endl;
+	}
+	data.close();
+
+
+	ans y[]={yes}, n[]={no};
+
+	Form *pbeg = create_list(12,male,start,y);
 	Form *pend = pbeg;
-	add(&pend,13,female,start,a2);
-	add(&pend,22,female,high,a1);
+	add(&pend,13,female,start,y);
+	add(&pend,22,male,high,y);
+	add(&pend,24,male,high,y);
 	show(pbeg);
+	cout << count(pbeg,25,male,high,y) << endl;
 	_getch();
 	return 0;
 	}
@@ -65,10 +80,15 @@ void show(Form *pbeg)
 	Form *pv = pbeg;
 	while (pv)
 		{
+		int i=0;
 		cout << "Age: "<< pv-> age << " ";
 		cout << "Sex: "<< get_sex(pv->s) << " ";
 		cout << "Education: "<< get_edu(pv->e) << endl;
-		for(int i=0;i<4;i++) cout  << " " << get_ans(pv->a[i]) << endl;
+		while((pv->a[i]==1) || (pv->a[i]==0))
+		{
+			cout  << " " << get_ans(pv->a[i]) << endl;
+			i++;
+		}
 		pv = pv->next;
 		cout << endl;
 		}
@@ -94,6 +114,18 @@ char* get_ans(ans a)
 	char* str = new char[];
 	a ?  strcpy(str,"yes") : strcpy(str,"no");
 	return str;
+	}
+int count(Form *pbeg,int age,sex s,edu e,ans *a)
+	{
+	int num=0;
+	Form *pv = pbeg;
+	while(pv)
+		{
+			if( ((pv->age)<age) && (pv->s==s) && (pv->e==e) && (pv->a==a))
+				num++;
+			pv = pv->next;
+		}
+	return num;
 	}
 
 
