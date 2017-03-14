@@ -23,7 +23,7 @@ char* get_sex(sex s);
 char* get_edu(edu e);
 char* get_ans(ans a);
 int count(Form *pbeg,int age,sex s,edu e,ans *a);
-void get_questions(int num=10);
+void get_questions(int num);
 
 int main()
 	{	
@@ -35,7 +35,7 @@ int main()
 	add(&pend,22,male,high,y);
 	add(&pend,24,male,high,y);
 	show(pbeg);
-	cout << count(pbeg,25,female,high,y) << endl;
+	cout << count(pbeg,25,male,high,y) << endl;
 	_getch();
 	return 0;
 	}
@@ -115,7 +115,7 @@ int count(Form *pbeg,int age,sex s,edu e,ans *a)
 				num++;
 			pv = pv->next;
 		}
-	cout << "Found (Age" << age <<"; Sex " << get_sex(s) << "; Education " << get_edu(e) << "; Answers " << get_ans(*a) << ")"<< endl;
+	cout << "Found [Age < " << age <<"; Sex " << get_sex(s) << "; Education " << get_edu(e) << "; Answers  " << get_ans(*a) << "]"<< endl;
 	return num;
 	}
 
