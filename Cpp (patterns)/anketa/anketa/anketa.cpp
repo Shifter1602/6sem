@@ -3,7 +3,7 @@
 #include <conio.h>
 using namespace std;
 
-enum sex{male,female};
+enum sex{female,male};
 enum edu{start,middle,high};
 enum ans{no,yes};
 struct Form
@@ -22,30 +22,20 @@ void show(Form *pbeg);
 char* get_sex(sex s);
 char* get_edu(edu e);
 char* get_ans(ans a);
-int count(Form *pbeg,int age,sex s,edu e,ans *a); 
+int count(Form *pbeg,int age,sex s,edu e,ans *a);
+void get_questions(int num=10);
 
 int main()
-	{
-	char buff[50];
-	ifstream data;
-	data.open("questions.txt");
-	while(!data.eof())
-	{
-	data.getline(buff,50);
-	cout << buff << endl;
-	}
-	data.close();
-
-
+	{	
 	ans y[]={yes}, n[]={no};
-
 	Form *pbeg = create_list(12,male,start,y);
 	Form *pend = pbeg;
+	get_questions(10);
 	add(&pend,13,female,start,y);
 	add(&pend,22,male,high,y);
 	add(&pend,24,male,high,y);
 	show(pbeg);
-	cout << count(pbeg,25,male,high,y) << endl;
+	cout << count(pbeg,25,female,high,y) << endl;
 	_getch();
 	return 0;
 	}
@@ -66,9 +56,9 @@ void add(Form **pend,int age, sex s, edu e, ans *a)
 	{
 	Form *pv = new Form;
 	pv -> age = age;
-	pv->s=s;
-	pv->e=e;
-	pv->a=a;
+	(pv -> s) = s;
+	(pv -> e) = e;
+	(pv -> a) = a;
 	pv -> next = 0;
 	pv -> prev = *pend;
 	(*pend) -> next = pv;
@@ -121,13 +111,23 @@ int count(Form *pbeg,int age,sex s,edu e,ans *a)
 	Form *pv = pbeg;
 	while(pv)
 		{
-			if( ((pv->age)<age) && (pv->s==s) && (pv->e==e) && (pv->a==a))
+			if( ((pv->age) < age) && (pv->s==s) && (pv->e==e) && (pv->a==a))
 				num++;
 			pv = pv->next;
 		}
+	cout << "Found (Age" << age <<"; Sex " << get_sex(s) << "; Education " << get_edu(e) << "; Answers " << get_ans(*a) << ")"<< endl;
 	return num;
 	}
 
-
-
-
+void get_questions(int num)
+	{
+		char* buff=new char[num];
+		ifstream data;
+		data.open("questions.txt");
+		while(!data.eof())
+			{
+			data.getline(buff,num);
+			cout << buff << endl;
+			}
+		data.close();
+	}
