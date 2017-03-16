@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Аренда помещений</title>
+	<style type="text/css">
+		.st0 {font-weight:bold;font-size: x-large; line-height: 2; }	
+	</style>
+</head>
+<body>
+	<form oninput="x.value=zerotime.value">
+		<table border="0">
+			<caption class="st0">Аренда помещений</caption>
+
+			<tr><td class="st1">№ помещения</td>
+			<td class="st2">
+				<input type="number" name="zachetka" min="1"
+				max="999" step="1" value="1" required>
+			</td></tr>
+
+			<tr><td class="st1">Место расположения</td>
+			<td><input type="text" name="place" size="50" maxlength="50" placeholder="Москва, Большой Факельный пер., д.38В"></td></tr>
+
+			<tr><td class="st1">
+				<label for="idArea">Площадь</label> 
+				<input type="range" id="idArea" name="area" min="10" max="400" step="1" value="10" required></td>
+
+				<td><output id="Area"> 10 
+
+				<script>
+				window.oninput = function GetArea() {
+				  var idArea = document.getElementById('idArea').value;
+				  document.getElementById('Area').innerHTML = idArea;
+				}
+				</script>
+				</output>
+				
+			</td></tr>
+
+
+			<tr><td class="st1">
+				Количество месяцев аренды </td>
+				<td>
+					<input  name="n_month" id="n_month"  value="1" pattern="[1-9]{1}[0-2]{0,1}" required>
+				</td>
+			</td></tr>
+
+			<tr><td class="st1">
+				Стоимость аренды (в мес.) </td>
+				<td>
+					<input name="cost_month" id="cost_month"  value="1" pattern="[1-9]{1}[0-9]{0,5}" required>
+				</td>
+			</td></tr>
+
+			<tr><td class="st1">Контактное лицо</td>
+			<td class="st2">
+				<select name="contact">
+					<option>Иванов И.И.</option>
+					<option>Петров П.П.</option>
+					<option>Сидорова С.С.</option>
+				</select>
+			</td></tr>
+
+
+			<tr><td class="st2">
+				<input type="submit" name="send" value="Отправить"></td>
+			<td class="st2">
+				<input type="reset" name="clear" value="Отменить"></td></tr>
+		</table>	
+	</form>
+</body>
+</html>

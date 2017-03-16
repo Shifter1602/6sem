@@ -1,0 +1,36 @@
+.a{
+	float: left;
+	width: 200px;
+	height: 650px;
+	background-color: green;
+	}
+
+.b{
+	float: left;
+	width: 800px;
+	height: 200px;
+	background-color: red;
+	clear: right;
+}
+
+.c{
+	
+	float: left;
+	width: 350px;
+	height: 250px;
+	background-color: blue;
+}
+.d{
+	float: right;
+	width: 450px;
+	height: 450px;
+	background-color: yellow;
+}
+
+.e{
+
+	float: left;
+	width: 350px;
+	height: 200px;
+	background-color: gray;
+}

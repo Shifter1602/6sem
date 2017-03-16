@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Сортировка массивов</title>
+	<script type="text/javascript">
+
+		function f()
+		{
+			var c=document.getElementById("dish");
+			var k=document.getElementById("item");
+			var t=document.getElementsByTagName("table")[0];
+			var r=t.getElementsByTagName("tr");
+			for (var j=1; j < r.length; j++)
+				{
+					d=r[j].getElementsByTagName("td");
+					if((c.value==d[0].innerHTML) && (k.value==d[1].innerHTML))
+					{
+						t.deleteRow(j);
+						return;
+					}
+					
+				}
+			alert(c.value+"  "+k.value+"  Not found");
+		}
+
+	</script>
+</head>
+<body>
+
+<table border="1">
+	<tr><td>dish</td><td>item</td><td>dim</td><td>quantity</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Мидии</td><td>граммы</td><td>340</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Лук</td><td>граммы</td><td>80</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Сыр</td><td>граммы</td><td>100</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Яйцо куриное</td><td>штуки</td><td>1</td></tr>
+	<tr><td>Салат с кальмарами</td><td>Кальмары</td><td>граммы</td><td>300</td></tr>
+	<tr><td>Салат с кальмарами</td><td>Яйцо куриное</td><td>штуки</td><td>3</td></tr>
+	<tr><td>Салат с кальмарами</td><td>Лук</td><td>граммы</td><td>100</td></tr>
+</table>
+<form>
+	<label for="dish">Наименование блюда</label>
+	<input id="dish" size="15" maxlength="50"><br>
+	<label for="item">Наименование продукта</label>
+	<input id="item" size="15" maxlength="50"><br>
+	<input type="button" value="delete" onclick="f()">
+</form>
+</body>
+</html>

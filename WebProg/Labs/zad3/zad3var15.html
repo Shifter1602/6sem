@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Сортировка массивов</title>
+	<mime charset="utf-8">
+	<script type="text/javascript">
+		var a=Array("Жульен с мидиями","Мидии","граммы",340,
+					"Жульен с мидиями","Лук","граммы",80,
+					"Жульен с мидиями","Сыр","граммы",100,
+					"Жульен с мидиями","Яйцо куриное","штуки",1,
+					"Салат с кальмарами","Кальмары","граммы",300,
+					"Салат с кальмарами","Яйцо куриное","штуки",3,
+					"Салат с кальмарами","Лук","граммы",100
+					);
+		function q(a,b)
+		{
+			if (a.item > b.item) return +1;
+			if (a.item < b.item) return -1;
+			if (a.quantity > b.quantity) return +1;
+			if (a.quantity < b.quantity) return -1;
+			return 0;
+		}
+
+		function receipt(dish,item,dim,quantity)
+		{
+			this.dish=dish;
+			this.item=item;
+			this.dim=dim;
+			this.quantity=quantity;
+		}
+
+		function f()
+		{
+			var b=[];
+			j=0;
+			for (var i = 0; i < a.length; i+=4)
+				{
+					b[j++]= new receipt(a[i],a[i+1],a[i+2],a[i+3]);
+				}
+			b.sort(q);
+			alert("***");
+			var t=document.getElementsByTagName("table")[0];
+			var r=t.getElementsByTagName("tr");
+			for (var j=0; j < b.length; j++)
+				{
+					var c=r[j+1].getElementsByTagName("td");
+					with (b[j])
+					{
+						c[0].innerHTML=dish;
+						c[1].innerHTML=item;
+						c[2].innerHTML=dim;
+						c[3].innerHTML=quantity;
+					}
+				}
+		}
+
+	</script>
+</head>
+<body>
+<table border="1">
+	<tr><td>Наименование блюда</td>
+	<td>Наименование продукта</td>
+	<td>Единицы измерения</td>
+	<td>Количество</td>
+	</tr>
+	<script type="text/javascript">
+		for (var i = 0; i < a.length; i+=4) {
+			document.write("<tr><td>"+a[i]+"</td><td>"+a[i+1]+"</td><td>"+a[i+2]+"</td><td>"+a[i+3]+"</td></tr>");
+		}
+	</script>
+</table>
+<form>
+	<input type="button" value="sort by " onclick="f()">
+</form>
+</body>
+</html>

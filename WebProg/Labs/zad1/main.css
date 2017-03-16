@@ -1,0 +1,35 @@
+.p1 {
+	font-size: 18mm;
+	font-family: serif;
+	color: #0000FF;
+	background-color: white;
+	line-height: 18mm;
+	word-spacing: 5mm;
+	letter-spacing: 2mm;	
+}
+
+.p1:first-letter{
+	height: 22mm;
+	font-family: "Arial";
+	color: #002137;
+	text-shadow: 2mm 3mm 1mm yellow;}
+
+.p2:first-letter{
+	height: 22pt;
+	font-family: serif;
+	font-style: oblique;
+	color: #ff6800;
+}
+
+.p2 {
+	font-size: 14pt; 
+	font-family: sans-serif;
+	font-style: oblique;
+	color: blue;
+	background-color: white;
+	font-weight: 900;
+	line-height: 18pt;
+	word-spacing: 3em;
+	letter-spacing: 1em;
+	text-shadow: 3px 4px 5px #49423d;}
+
