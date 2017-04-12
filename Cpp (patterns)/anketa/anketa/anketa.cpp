@@ -115,7 +115,7 @@ int count(Form *pbeg,int age,sex s,edu e,ans *a)
 				num++;
 			pv = pv->next;
 		}
-	cout << "Found [Age < " << age <<"; Sex " << get_sex(s) << "; Education " << get_edu(e) << "; Answers  " << get_ans(*a) << "]"<< endl;
+	cout << "Found [ sAge < " << age <<"; Sex " << get_sex(s) << "; Education " << get_edu(e) << "; Answers  " << get_ans(*a) << " ]"<< endl;
 	return num;
 	}
 

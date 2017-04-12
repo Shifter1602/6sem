@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>DZ 7</title>
+<style type="text/css">
+	.a {position: absolute; left: 0px; top: 0px; width: 800px; height: 100px;
+	background-color: red;}
+	.b {position: absolute; left: 800px; top: 0px; width: 600px; height: 100px;
+	background-color: yellow;}
+	.c {position: absolute; left: 0px; top: 100px; width: 100px; height: 500px;
+	background-color: green;}
+
+	#d {position: absolute; left: 100px; top: 100px; width: 400px; height: 500px; background-color: grey;}
+
+	.e {position: absolute; left: 0px; top: 600px; width: 500px; height: 300px;
+	background-color: blue;}
+
+	#f {position: absolute; left: 500px; top: 100px; width: 900px; height: 700px; background-color: magenta;}
+
+	.g {position: absolute; left: 500px; top: 800px; width: 900px; height: 100px;
+	background-color: navy;}
+
+	.h {position: absolute; left: 0px; top: 900px; width: 1400px; height: 50px;
+	background-color: orange;}
+</style>
+
+<script type="text/javascript">
+
+var x1=[["n_pos","item","dim"],
+		[100,"Мидии","кг"],
+		[101,"Лук","кг"],
+		[102,"Сыр","граммы"],
+		[103,"Майонез","кг"],
+		[105,"Кальмары","кг"],
+		[106,"Яйцо куриное","шт"],
+		[107,"Огурец соленый","шт"]];
+var x2 = [["n_res","n_nom"],
+		[101,"Салат с кальмарами"],
+		[103,"Жульен с мидиями"]];
+var x3 = [["n_res","n_nom","quantity"],
+		[103,100,"0,340"],
+		[103,101,"0,100"],
+		[103,102,"0,080"],
+		[103,103,"0,100"],
+		[101,105,"0,300"],
+		[101,106,"3"],
+		[101,107,"0,150"]];
+
+var y1 = [["n_pos","№ позиции"],
+		["item","Наименование продукта"],
+		["dim","Единицы измерения"]];
+var y2 = [["n_res","№ рецепта"],
+			["dish","Название блюда"]];
+var y3 = [["n_res_","№ рецепта"],
+			["n_nom","Номенклатурный №"],
+			["quantity","Количество"]];
+
+var flag=false;
+var flag2=0;
+
+function f(file,file2) 
+{ 
+	var newEl, i, j, row, td, txt;
+	var newEl1, k, lbl, inp; 
+	if(flag) 
+	{ 
+		newEl=document.getElementsByTagName("table")[0]; 
+		newEl.parentNode.removeChild(newEl);
+		newEl1 = document.getElementById('form1');
+		newEl1.parentNode.removeChild(newEl1); 
+	} 
+	else 
+	{ 
+		flag=true; 
+	} 
+	newEl = document.createElement('table'); 
+	newEl.setAttribute("width", "800"); 
+	newEl.setAttribute("border", "1");
+	if(flag2==0)
+	{
+		newEl.setAttribute("id","tab1");
+	}
+	if(flag2==1)
+	{
+		newEl.setAttribute("id","tab2");	
+	}
+	if(flag2==2)
+	{
+		newEl.setAttribute("id","tab3");	
+	}
+	//newEl.setAttribute("id","tab");
+
+	newEl1 = document.createElement('form');
+	newEl1.setAttribute("id","form1");
+
+	for(j=0; j<file.length;j++) 
+	{ 
+		row = document.createElement('TR'); 
+		for(i=0; i<file[j].length; i++) 
+		{ 
+			var td= document.createElement('TD'); 
+			var txt = document.createTextNode(file[j][i]); 
+			td.appendChild(txt); 
+			row.appendChild(td); 
+		} 
+		newEl.appendChild(row); 
+	}
+
+	for(k=0; k<file2.length;k++)
+	{
+		lbl  = document.createElement('label');
+		inp  = document.createElement('input');
+		lbl.setAttribute("for",file2[k][0]) 
+		var txt = document.createTextNode(file2[k][1]);
+		var br = document.createElement('BR'); 
+		lbl.appendChild(txt);
+		inp.setAttribute("for",file2[k][0]);
+		inp.setAttribute("size","15");
+		inp.setAttribute("id",file2[k][0]);
+		newEl1.appendChild(lbl);
+		newEl1.appendChild(inp);
+		newEl1.appendChild(br);
+	} 
+
+	document.getElementById("f").appendChild(newEl);
+	document.getElementById("d").appendChild(newEl1);
+}
+
+function f2(file,file2)
+{
+	if ((file == x1) && (file2 == y1))
+		{
+			flag2=0;
+		}
+	if ((file == x2) && (file2 == y2))
+		{
+			flag2=1;
+		}
+	if ((file == x3) && (file2 == y3))
+		{
+			flag2=2;
+		}
+	f(file,file2);	
+}
+
+	function add()
+		{
+			if (flag2==0)
+			{
+				var c0=document.getElementById("n_pos");
+				var c1=document.getElementById("item");
+				var c2=document.getElementById("dim");
+				var t=document.getElementById("tab1");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						var d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML)
+						{
+							alert("Already Have");
+							return;
+						}
+					}
+					r=t.insertRow();
+					d=document.createElement('td');
+					d.innerHTML=c0.value;
+					r.appendChild(d);
+
+					d=document.createElement('td');
+					d.innerHTML=c1.value;
+					r.appendChild(d);
+
+					d=document.createElement('td');
+					d.innerHTML=c2.value;
+					r.appendChild(d);
+			}
+
+			if (flag2==1)
+			{
+				var c0=document.getElementById("n_res");
+				var c1=document.getElementById("dish");
+				var t=document.getElementById("tab2");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						var d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML)
+						{
+							alert("Already Have");
+							return;
+						}
+					}
+					r=t.insertRow();
+					d=document.createElement('td');
+					d.innerHTML=c0.value;
+					r.appendChild(d);
+
+					d=document.createElement('td');
+					d.innerHTML=c1.value;
+					r.appendChild(d);
+					
+			}
+
+			if (flag2==2)
+			{
+				var c0=document.getElementById("n_res_");
+				var c1=document.getElementById("n_nom");
+				var c2=document.getElementById("quantity");
+				var t=document.getElementById("tab3");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						var d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML &&
+							c1.value==d[1].innerHTML)
+						{
+							alert("Already Have");
+							return;
+						}
+					}
+					r=t.insertRow();
+					d=document.createElement('td');
+					d.innerHTML=c0.value;
+					r.appendChild(d);
+
+					d=document.createElement('td');
+					d.innerHTML=c1.value;
+					r.appendChild(d);
+					
+					d=document.createElement('td');
+					d.innerHTML=c2.value;
+					r.appendChild(d);
+			}
+		}	
+
+	function del()
+		{
+			if (flag2==0)
+			{
+				var c0=document.getElementById("n_pos");
+				var t=document.getElementById("tab1");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML)
+						{
+							t.deleteRow(j);
+							return;
+						}	
+					}
+				alert(c0.value +"  Not found");
+
+			}
+			if (flag2==1)
+			{
+				var c0=document.getElementById("n_res");
+				var t=document.getElementById("tab2");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML)
+						{
+							t.deleteRow(j);
+							return;
+						}	
+					}
+				alert(c0.value +"  Not found");
+			}
+			if (flag2==2)
+			{
+				var c0=document.getElementById("n_res_");
+				var c1=document.getElementById("n_nom");
+				var t=document.getElementById("tab3");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						d=r[j].getElementsByTagName("td");
+						if((c0.value==d[0].innerHTML) && (c1.value==d[1].innerHTML))
+						{
+							t.deleteRow(j);
+							return;
+						}	
+					}
+				alert(c0.value + " " + c1.value + " " + "Not found");
+			}
+		}
+
+	function find()
+		{
+			if (flag==0)
+			{
+				var c0=document.getElementById("n_pos");
+				var c1=document.getElementById("item");
+				var c2=document.getElementById("dim");
+				var t=document.getElementById("tab1");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						var d=r[j].getElementsByTagName("td"); 
+						if(c0.value==d[0].innerHTML)
+						{
+							c1.value=d[1].innerHTML;
+							c2.value=d[2].innerHTML;
+							document.getElementById("hid10").value=d[0].innerHTML;
+							return;
+						}		
+					}
+				alert("Not found");
+			}
+			if (flag2==1)
+			{
+				var c0=document.getElementById("n_res");
+				var c1=document.getElementById("dish");
+				var t=document.getElementById("tab2");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+				{
+					var d=r[j].getElementsByTagName("td"); 
+					if(c0.value==d[0].innerHTML)
+					{
+						c1.value=d[1].innerHTML;
+						document.getElementById("hid20").value=d[0].innerHTML;
+						return;
+					}		
+				}
+				alert("Not found");
+			}
+			if (flag==2)
+			{
+				var c0=document.getElementById("n_res_");
+				var c1=document.getElementById("n_nom");
+				var c2=document.getElementById("quantity");
+				var t=document.getElementById("tab3");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+				{
+					var d=r[j].getElementsByTagName("td"); 
+					if((c0.value==d[0].innerHTML) && (c1.value==d[1].innerHTML))
+					{
+						c2.value=d[2].innerHTML;
+						document.getElementById("hid30").value=d[0].innerHTML;
+						document.getElementById("hid31").value=d[1].innerHTML;
+						return;
+					}		
+				}
+				alert("Not found");
+			}	
+		}
+
+		function update()
+		{
+			if (flag2==0)
+			{
+				var c0=document.getElementById("n_pos");
+				var t=document.getElementById("tab1");
+				var r=t.getElementsByTagName("tr"); 
+				
+				if(!((c0.value == document.getElementById("hid10").value)))
+				{
+					for (var j=1;j<r.length;j++)
+					{ 
+						var d=r[j].getElementsByTagName("td"); 
+						if (c0.value==d[0].innerHTML)
+						{
+							alert("Запись есть");
+							return;
+						}
+					}
+				}
+				b0=document.getElementById("hid10");
+				for (var j=1;j<r.length;j++)
+				{ 
+					var d=r[j].getElementsByTagName("td"); 
+					if (b0.value==d[0].innerHTML)
+					{
+						d[0].innerHTML = document.getElementById("n_pos").value;
+						d[1].innerHTML = document.getElementById("item").value;
+						d[2].innerHTML = document.getElementById("dim").value;
+						return;
+					}
+				}
+			}
+			if (flag2==1)
+			{
+				var c0=document.getElementById("n_res");
+				var t=document.getElementById("tab2");
+				var r=t.getElementsByTagName("tr");
+				if(!((c0.value == document.getElementById("hid20").value)))
+				{
+					for (var j=1;j<r.length;j++)
+					{ 
+						var d=r[j].getElementsByTagName("td"); 
+						if (c0.value==d[0].innerHTML)
+						{
+							alert("Запись есть");
+							return;
+						}
+					}
+				}
+				b0=document.getElementById("hid20");
+				for (var j=1;j<r.length;j++)
+				{ 
+					var d=r[j].getElementsByTagName("td"); 
+					if (b0.value==d[0].innerHTML)
+					{
+						d[0].innerHTML = document.getElementById("n_res").value;
+						d[1].innerHTML = document.getElementById("dish").value;
+						return;
+					}
+				}
+			}
+			if (flag2==2)
+			{
+				var c0=document.getElementById("n_res_");
+				var c1=document.getElementById("n_nom");
+				var t=document.getElementById("tab3");
+				var r=t.getElementsByTagName("tr");
+				if(!((c0.value == document.getElementById("hid30").value) &&
+				(c1.value == document.getElementById("hid31").value)))
+				{
+					for (var j=1;j<r.length;j++)
+					{ 
+						var d=r[j].getElementsByTagName("td"); 
+						if ((c0.value==d[0].innerHTML) && (c1.value==d[1].innerHTML))
+						{
+							alert("Запись есть");
+							return;
+						}
+					}
+				}
+
+				b0=document.getElementById("hid30");
+				b1=document.getElementById("hid31"); 
+
+				for (var j=1;j<r.length;j++)
+				{ 
+					var d=r[j].getElementsByTagName("td"); 
+					if ((b0.value==d[0].innerHTML) && (b1.value==d[1].innerHTML))
+					{
+						d[0].innerHTML = document.getElementById("n_res_").value;
+						d[1].innerHTML = document.getElementById("n_nom").value;
+						d[2].innerHTML = document.getElementById("quantity").value;
+						return;
+					}
+				}
+			}
+		}
+
+</script>
+
+</head>
+<body>
+	<div class="a">
+		Название организации
+	</div>
+	<div class="b">
+		Место расположения...
+	</div>
+	<div class="c">
+		<form>
+			<input type="button" value="Find" onclick="find()"><br>
+			<input type="button" value="Delete" onclick="del()"><br>
+			<input type="button" value="Update" onclick="update()"><br>
+			<input type="button" value="Add" onclick="add()"><br>
+		</form>
+	</div>
+	<div id="d">
+		<input type="hidden" id="hid10" value="null">
+		<input type="hidden" id="hid20" value="null">
+		<input type="hidden" id="hid30" value="null">
+		<input type="hidden" id="hid31" value="null">
+	</div>
+	<div class="e">
+		ПРОБЛЕМЫ С ДОСТУПОМ К ДЖОЙКАЗИНО????	
+	</div>
+	<div id="f">	
+	</div>
+	<div class="g">
+		<p align="center">
+		Menu<br>
+			<input type="button" value="Table1" onclick="f2(x1,y1)">
+			<input type="button" value="Table2" onclick="f2(x2,y2)">
+			<input type="button" value="Table3" onclick="f2(x3,y3)">
+		</p>	
+	</div>
+	<div class="h">
+		Copyright???	
+	</div>
+</body>
+</html>

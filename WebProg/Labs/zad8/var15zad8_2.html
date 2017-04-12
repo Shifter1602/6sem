@@ -1,0 +1,68 @@
+<!doctype html> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<script> 
+var x=[["№ порядковый", "дата проведения", "мероприятие", "стоимость услуг"], 
+	[100, "20.06.2013", "Рыбня ловля", 19000], 
+	[101, "20.06.2013", "Рыбная ловля", 19000], 
+	[102, "20.06.2013", "ВЫезд на подленный", 3100]]; 
+
+var x1=[["n_pos","item","dim"],
+		[100,"Мидии","кг"],
+		[101,"Лук","кг"],
+		[102,"Сыр","граммы"],
+		[103,"Майонез","кг"],
+		[105,"Кальмары","кг"],
+		[106,"Яйцо куриное","шт"],
+		[107,"Огурец соленый","шт"]];
+var x2 = [[101,"Салат с кальмарами"],
+		[103,"Жульен с мидиями"]];
+var x3 = [[103,100,"0,340"],
+		[103,101,"0,100"],
+		[103,102,"0,080"],
+		[103,103,"0,100"],
+		[101,105,"0,300"],
+		[101,106,"3"],
+		[101,107,"0,150"]];
+
+var y1 = [["n_pos","№ позиции"],
+		["item","Наименование продукта"],
+		["dim","Единицы измерения"]];
+var y2 = [["n_res","№ рецепта"],
+			["dish","Название блюда"]];
+var y3 = [["n_res_","№ рецепта"],
+			["n_nom","Номенклатурный №"],
+			["quantity","Количество"]];
+var flag=false; 
+
+function f(file) 
+{ 
+	var newEl1, k, lbl, inp; 
+	newEl1 = document.createElement('form');
+	newEl1.setAttribute("id","form1");
+	for(k=0; k<file.length;j++)
+	{
+		lbl  = document.createElement('label');
+		inp  = document.createElement('input');
+		lbl.setAttribute("for",file[k][0]) 
+		var txt = document.createTextNode(file[k][1]);
+		var br = document.createElement('BR'); 
+		lbl.appendChild(txt);
+		inp.setAttribute("for",file[k][0]);
+		inp.setAttribute("size","15");
+		newEl1.appendChild(lbl);
+		newEl1.appendChild(br);
+		newEl1.appendChild(inp);
+	} 
+	document.getElementById("a").appendChild(newEl1); 
+} 
+</script> 
+</head> 
+<body> 
+<div id="a"></div> 
+<form id> 
+<input type="button" value="Общество рыбаков любителей" onclick=f(y1)> 
+</form> 
+</body> 
+</html>

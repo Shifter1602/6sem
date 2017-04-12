@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Array Sort</title>
+	<style type="text/css">
+		.st {width: 30ex;}
+		.st0 {text-align: center;}
+		.st1 {text-align: right;}
+	</style>
+	<script type="text/javascript">
+		function find()
+		{
+			var c0=document.getElementById("dish");
+			var c1=document.getElementById("item");
+			var c2=document.getElementById("dim");
+			var c3=document.getElementById("quantity");
+			var t=document.getElementsByTagName("table")[0];
+			var r=t.getElementsByTagName("tr");
+			for (var j=1; j < r.length; j++)
+				{
+					var d=r[j].getElementsByTagName("td"); 
+					if((c0.value==d[0].innerHTML) && (c1.value==d[1].innerHTML))
+					{
+						c2.value=d[2].innerHTML;
+						c3.value=d[3].innerHTML;
+						document.getElementById("hid0").value=d[0].innerHTML;
+						document.getElementById("hid1").value=d[1].innerHTML;
+						return;
+					}		
+				}
+				alert("Not found");
+			
+		}
+		function update()
+		{
+			var c0=document.getElementById("dish");
+			var c1=document.getElementById("item");
+			var c2=document.getElementById("dim");
+			var c3=document.getElementById("quantity");
+			var t=document.getElementsByTagName("table")[0];
+			var r=t.getElementsByTagName("tr"); 
+			
+			if(!((c0.value == document.getElementById("hid0").value) &&
+				(c1.value == document.getElementById("hid1").value)))
+			{
+			for (var j=1;j<r.length;j++)
+			{ 
+				var d=r[j].getElementsByTagName("td"); 
+				if ((c0.value==d[0].innerHTML) && (c1.value==d[1].innerHTML))
+				{
+					alert("Запись есть");
+
+					return;
+				}
+			}
+			}
+
+			b0=document.getElementById("hid0");
+			b1=document.getElementById("hid1"); 
+
+			for (var j=1;j<r.length;j++)
+			{ 
+				var d=r[j].getElementsByTagName("td"); 
+				if ((b0.value==d[0].innerHTML) && (b1.value==d[1].innerHTML))
+				{
+					
+					
+
+
+					d[0].innerHTML = document.getElementById("dish").value;
+					d[1].innerHTML = document.getElementById("item").value;
+					d[2].innerHTML = document.getElementById("dim").value;
+					d[3].innerHTML = document.getElementById("quantity").value;
+					return;
+		}
+	}
+}
+	</script>
+</head>
+<body>
+<table border="1">
+	<tr><td>dish</td><td>item</td><td>dim</td><td>quantity</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Мидии</td><td>граммы</td><td>340</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Лук</td><td>граммы</td><td>80</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Сыр</td><td>граммы</td><td>100</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Яйцо куриное</td><td>штуки</td><td>1</td></tr>
+	<tr><td>Салат с кальмарами</td><td>Кальмары</td><td>граммы</td><td>300</td></tr>
+	<tr><td>Салат с кальмарами</td><td>Яйцо куриное</td><td>штуки</td><td>3</td></tr>
+	<tr><td>Салат с кальмарами</td><td>Лук</td><td>граммы</td><td>100</td></tr>
+</table>
+<form>
+	<label for="dish">Наименование блюда</label>
+	<input id="dish" size="15" maxlength="50"><br>
+	<label for="item">Наименование продукта</label>
+	<input id="item" size="15" maxlength="50"><br>
+	<label for="dim">Единицы измерения</label>
+	<input id="dim" size="15" maxlength="50"><br>
+	<label for="quantity">Количество</label>
+	<input id="quantity" size="15" maxlength="50"><br>
+	<input type="hidden" id="hid0" value="null">
+	<input type="hidden" id="hid1" value="null">
+	<input type="button" value="Find" onclick="find()">
+	<input type="button" value="Update" onclick="update()">
+</form>
+
+</body>
+</html>

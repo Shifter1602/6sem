@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Array Sort</title>
+	<style type="text/css">
+		.st {width: 30ex;}
+		.st0 {text-align: center;}
+		.st1 {text-align: right;}
+	</style>
+	<script type="text/javascript">
+		function add()
+		{
+			var c0=document.getElementById("dish");
+			var c1=document.getElementById("item");
+			var c2=document.getElementById("dim");
+			var c3=document.getElementById("quantity");
+			var t=document.getElementsByTagName("table")[0];
+			var r=t.getElementsByTagName("tr");
+			for (var j=1; j < r.length; j++)
+				{
+					var d=r[j].getElementsByTagName("td");
+					if(c0.value==d[0].innerHTML &&
+					   c1.value==d[1].innerHTML)
+					{
+						alert("Already Have");
+						return;
+					}
+				}
+				r=t.insertRow();
+				d=document.createElement('td');
+				d.innerHTML=c0.value;
+				r.appendChild(d);
+				d=document.createElement('td');
+				d.innerHTML=c1.value;
+				r.appendChild(d);
+				d=document.createElement('td');
+				d.innerHTML=c2.value;
+				r.appendChild(d);
+				d=document.createElement('td');
+				d.innerHTML=c3.value;
+				r.appendChild(d);		
+		
+		}
+	</script>
+</head>
+<body>
+<table border="1">
+	<tr><td>dish</td><td>item</td><td>dim</td><td>quantity</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Мидии</td><td>граммы</td><td>340</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Лук</td><td>граммы</td><td>80</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Сыр</td><td>граммы</td><td>100</td></tr>
+	<tr><td>Жульен с мидиями</td><td>Яйцо куриное</td><td>штуки</td><td>1</td></tr>
+	<tr><td>Салат с кальмарами</td><td>Кальмары</td><td>граммы</td><td>300</td></tr>
+	<tr><td>Салат с кальмарами</td><td>Яйцо куриное</td><td>штуки</td><td>3</td></tr>
+	<tr><td>Салат с кальмарами</td><td>Лук</td><td>граммы</td><td>100</td></tr>
+</table>
+<form>
+	<label for="dish">Наименование блюда</label>
+	<input id="dish" size="15" maxlength="50"><br>
+	<label for="item">Наименование продукта</label>
+	<input id="item" size="15" maxlength="50"><br>
+	<label for="dim">Единицы измерения</label>
+	<input id="dim" size="15" maxlength="50"><br>
+	<label for="quantity">Количество</label>
+	<input id="quantity" size="15" maxlength="50"><br>
+	<input type="button" value="Add" onclick="add()">
+</form>
+
+</body>
+</html>

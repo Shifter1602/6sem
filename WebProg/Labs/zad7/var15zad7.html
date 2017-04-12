@@ -1,0 +1,468 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>DZ 7</title>
+<style type="text/css">
+	.a {position: absolute; left: 0px; top: 0px; width: 800px; height: 100px;
+	background-color: red;}
+	.b {position: absolute; left: 800px; top: 0px; width: 600px; height: 100px;
+	background-color: yellow;}
+	.c {position: absolute; left: 0px; top: 100px; width: 100px; height: 500px;
+	background-color: green;}
+
+	#d1 {z-index: 2; position: absolute; left: 100px; top: 100px; width: 400px; height: 500px; background-color: grey;}
+	#d2 {z-index: 1; position: absolute; left: 100px; top: 100px; width: 400px; height: 500px; background-color: grey;}
+	#d3 {z-index: 0; position: absolute; left: 100px; top: 100px; width: 400px; height: 500px; background-color: grey;}
+
+	.e {position: absolute; left: 0px; top: 600px; width: 500px; height: 300px;
+	background-color: blue;}
+
+	#f1 {z-index: 2; position: absolute; left: 500px; top: 100px; width: 900px; height: 700px; background-color: magenta;}
+	#f2 {z-index: 1; position: absolute; left: 500px; top: 100px; width: 900px; height: 700px; background-color: magenta;}
+	#f3 {z-index: 0; position: absolute; left: 500px; top: 100px; width: 900px; height: 700px; background-color: magenta;}
+
+	.g {position: absolute; left: 500px; top: 800px; width: 900px; height: 100px;
+	background-color: navy;}
+
+	.h {position: absolute; left: 0px; top: 900px; width: 1400px; height: 50px;
+	background-color: orange;}
+</style>
+
+<script type="text/javascript">
+	function show(i)
+	{
+		if(i==0)
+		{
+			document.getElementById("d1").style.zIndex=2;
+			document.getElementById("f1").style.zIndex=2;
+			document.getElementById("d2").style.zIndex=1;
+			document.getElementById("f2").style.zIndex=1;
+			document.getElementById("d3").style.zIndex=0;
+			document.getElementById("f3").style.zIndex=0;
+		}
+		if(i==1)
+		{
+			document.getElementById("d1").style.zIndex=1;
+			document.getElementById("f1").style.zIndex=1;
+			document.getElementById("d2").style.zIndex=2;
+			document.getElementById("f2").style.zIndex=2;
+			document.getElementById("d3").style.zIndex=0;
+			document.getElementById("f3").style.zIndex=0;
+		}
+		if(i==2)
+		{
+			document.getElementById("d1").style.zIndex=0;
+			document.getElementById("f1").style.zIndex=0;
+			document.getElementById("d2").style.zIndex=1;
+			document.getElementById("f2").style.zIndex=1;
+			document.getElementById("d3").style.zIndex=2;
+			document.getElementById("f3").style.zIndex=2;
+		} 
+	}
+
+	function add()
+		{
+			if (document.getElementById("f1").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_pos");
+				var c1=document.getElementById("item");
+				var c2=document.getElementById("dim");
+				var t=document.getElementById("tab1");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						var d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML)
+						{
+							alert("Already Have");
+							return;
+						}
+					}
+					r=t.insertRow();
+					d=document.createElement('td');
+					d.innerHTML=c0.value;
+					r.appendChild(d);
+
+					d=document.createElement('td');
+					d.innerHTML=c1.value;
+					r.appendChild(d);
+
+					d=document.createElement('td');
+					d.innerHTML=c2.value;
+					r.appendChild(d);
+			}
+
+			if (document.getElementById("f2").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_res");
+				var c1=document.getElementById("dish");
+				var t=document.getElementById("tab2");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						var d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML)
+						{
+							alert("Already Have");
+							return;
+						}
+					}
+					r=t.insertRow();
+					d=document.createElement('td');
+					d.innerHTML=c0.value;
+					r.appendChild(d);
+
+					d=document.createElement('td');
+					d.innerHTML=c1.value;
+					r.appendChild(d);
+					
+			}
+
+			if (document.getElementById("f3").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_res_");
+				var c1=document.getElementById("n_nom");
+				var c2=document.getElementById("quantity");
+				var t=document.getElementById("tab3");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						var d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML &&
+							c1.value==d[1].innerHTML)
+						{
+							alert("Already Have");
+							return;
+						}
+					}
+					r=t.insertRow();
+					d=document.createElement('td');
+					d.innerHTML=c0.value;
+					r.appendChild(d);
+
+					d=document.createElement('td');
+					d.innerHTML=c1.value;
+					r.appendChild(d);
+					
+					d=document.createElement('td');
+					d.innerHTML=c2.value;
+					r.appendChild(d);
+			}
+					
+		
+		}	
+
+	function del()
+		{
+			if (document.getElementById("f1").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_pos");
+				var t=document.getElementById("tab1");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML)
+						{
+							t.deleteRow(j);
+							return;
+						}	
+					}
+				alert(c0.value +"  Not found");
+
+			}
+			if (document.getElementById("f2").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_res");
+				var t=document.getElementById("tab2");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						d=r[j].getElementsByTagName("td");
+						if(c0.value==d[0].innerHTML)
+						{
+							t.deleteRow(j);
+							return;
+						}	
+					}
+				alert(c0.value +"  Not found");
+			}
+			if (document.getElementById("f3").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_res_");
+				var c1=document.getElementById("n_nom");
+				var t=document.getElementById("tab3");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						d=r[j].getElementsByTagName("td");
+						if((c0.value==d[0].innerHTML) && (c1.value==d[1].innerHTML))
+						{
+							t.deleteRow(j);
+							return;
+						}	
+					}
+				alert(c0.value + " " + c1.value + " " + "Not found");
+			}
+		}
+
+	function find()
+		{
+			if (document.getElementById("f1").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_pos");
+				var c1=document.getElementById("item");
+				var c2=document.getElementById("dim");
+				var t=document.getElementById("tab1");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+					{
+						var d=r[j].getElementsByTagName("td"); 
+						if(c0.value==d[0].innerHTML)
+						{
+							c1.value=d[1].innerHTML;
+							c2.value=d[2].innerHTML;
+							document.getElementById("hid10").value=d[0].innerHTML;
+							return;
+						}		
+					}
+				alert("Not found");
+			}
+			if (document.getElementById("f2").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_res");
+				var c1=document.getElementById("dish");
+				var t=document.getElementById("tab2");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+				{
+					var d=r[j].getElementsByTagName("td"); 
+					if(c0.value==d[0].innerHTML)
+					{
+						c1.value=d[1].innerHTML;
+						document.getElementById("hid20").value=d[0].innerHTML;
+						return;
+					}		
+				}
+				alert("Not found");
+			}
+			if (document.getElementById("f3").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_res_");
+				var c1=document.getElementById("n_nom");
+				var c2=document.getElementById("quantity");
+				var t=document.getElementById("tab3");
+				var r=t.getElementsByTagName("tr");
+				for (var j=1; j < r.length; j++)
+				{
+					var d=r[j].getElementsByTagName("td"); 
+					if((c0.value==d[0].innerHTML) && (c1.value==d[1].innerHTML))
+					{
+						c2.value=d[2].innerHTML;
+						document.getElementById("hid30").value=d[0].innerHTML;
+						document.getElementById("hid31").value=d[1].innerHTML;
+						return;
+					}		
+				}
+				alert("Not found");
+			}	
+		}
+
+		function update()
+		{
+			if (document.getElementById("f1").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_pos");
+				var t=document.getElementById("tab1");
+				var r=t.getElementsByTagName("tr"); 
+				
+				if(!((c0.value == document.getElementById("hid10").value)))
+				{
+					for (var j=1;j<r.length;j++)
+					{ 
+						var d=r[j].getElementsByTagName("td"); 
+						if (c0.value==d[0].innerHTML)
+						{
+							alert("Запись есть");
+							return;
+						}
+					}
+				}
+				b0=document.getElementById("hid10");
+				for (var j=1;j<r.length;j++)
+				{ 
+					var d=r[j].getElementsByTagName("td"); 
+					if (b0.value==d[0].innerHTML)
+					{
+						d[0].innerHTML = document.getElementById("n_pos").value;
+						d[1].innerHTML = document.getElementById("item").value;
+						d[2].innerHTML = document.getElementById("dim").value;
+						return;
+					}
+				}
+			}
+			if (document.getElementById("f2").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_res");
+				var t=document.getElementById("tab2");
+				var r=t.getElementsByTagName("tr");
+				if(!((c0.value == document.getElementById("hid20").value)))
+				{
+					for (var j=1;j<r.length;j++)
+					{ 
+						var d=r[j].getElementsByTagName("td"); 
+						if (c0.value==d[0].innerHTML)
+						{
+							alert("Запись есть");
+							return;
+						}
+					}
+				}
+				b0=document.getElementById("hid20");
+				for (var j=1;j<r.length;j++)
+				{ 
+					var d=r[j].getElementsByTagName("td"); 
+					if (b0.value==d[0].innerHTML)
+					{
+						d[0].innerHTML = document.getElementById("n_res").value;
+						d[1].innerHTML = document.getElementById("dish").value;
+						return;
+					}
+				}
+			}
+			if (document.getElementById("f3").style.zIndex==2)
+			{
+				var c0=document.getElementById("n_res_");
+				var c1=document.getElementById("n_nom");
+				var t=document.getElementById("tab3");
+				var r=t.getElementsByTagName("tr");
+				if(!((c0.value == document.getElementById("hid30").value) &&
+				(c1.value == document.getElementById("hid31").value)))
+				{
+					for (var j=1;j<r.length;j++)
+					{ 
+						var d=r[j].getElementsByTagName("td"); 
+						if ((c0.value==d[0].innerHTML) && (c1.value==d[1].innerHTML))
+						{
+							alert("Запись есть");
+							return;
+						}
+					}
+				}
+
+				b0=document.getElementById("hid30");
+				b1=document.getElementById("hid31"); 
+
+				for (var j=1;j<r.length;j++)
+				{ 
+					var d=r[j].getElementsByTagName("td"); 
+					if ((b0.value==d[0].innerHTML) && (b1.value==d[1].innerHTML))
+					{
+						d[0].innerHTML = document.getElementById("n_res_").value;
+						d[1].innerHTML = document.getElementById("n_nom").value;
+						d[2].innerHTML = document.getElementById("quantity").value;
+						return;
+					}
+				}
+			}
+		}
+
+</script>
+
+</head>
+<body>
+	<div class="a">
+		Название организации
+	</div>
+	<div class="b">
+		Место расположения...
+	</div>
+	<div class="c">
+		<form>
+			<input type="button" value="Find" onclick="find()"><br>
+			<input type="button" value="Delete" onclick="del()"><br>
+			<input type="button" value="Update" onclick="update()"><br>
+			<input type="button" value="Add" onclick="add()"><br>
+		</form>
+	</div>
+	<div id="d1">
+		<label for="n_pos">№ позиции</label>
+		<input id="n_pos" size="15" maxlength="50"><br>
+		<label for="item">Наименование продукта</label>
+		<input id="item" size="15" maxlength="50"><br>
+		<label for="dim">Единицы измерения</label>
+		<input id="dim" size="15" maxlength="50"><br>
+
+		<input type="hidden" id="hid10" value="null">	
+	</div>
+	<div id="d2">
+		<label for="n_res">№ рецепта</label>
+		<input id="n_res" size="15" maxlength="50"><br>
+		<label for="dish">Название блюда</label>
+		<input id="dish" size="15" maxlength="50"><br>
+
+		<input type="hidden" id="hid20" value="null">	
+	</div>
+	<div id="d3">
+		<label for="n_res_">№ рецепта</label>
+		<input id="n_res_" size="15" maxlength="50"><br>
+		<label for="n_nom">Номенклатурный №</label>
+		<input id="n_nom" size="15" maxlength="50"><br>
+		<label for="quantity">Количество</label>
+		<input id="quantity" size="15" maxlength="50"><br>
+
+		<input type="hidden" id="hid30" value="null">
+		<input type="hidden" id="hid31" value="null">
+	</div>
+
+	<div class="e">
+		ПРОБЛЕМЫ С ДОСТУПОМ К ДЖОЙКАЗИНО????	
+	</div>
+
+	<div id="f1">
+		<table border="1" id="tab1">
+			<tr><td>n_pos</td><td>item</td><td>dim</td></tr>
+			<tr><td>100</td><td>Мидии</td><td>кг</td></tr>
+			<tr><td>101</td><td>Лук</td><td>кг</td></tr>
+			<tr><td>102</td><td>Сыр</td><td>граммы</td></tr>
+			<tr><td>103</td><td>Майонез</td><td>кг</td></tr>
+			<tr><td>105</td><td>Кальмары</td><td>кг</td></tr>
+			<tr><td>106</td><td>Яйцо куриное</td><td>шт</td></tr>
+			<tr><td>107</td><td>Огурец соленый</td><td>шт</td></tr>
+		</table>	
+	</div>
+	<div id="f2">
+		<table border="1" id="tab2">
+			<tr><td>n_res</td><td>dish</td></tr>
+			<tr><td>101</td><td>Салат с кальмарами</td></tr>
+			<tr><td>103</td><td>Жульен с мидиями</td></tr>	
+		</table>	
+	</div>
+	<div id="f3">
+		<table border="1" id="tab3">
+			<tr><td>n_res</td><td>n_nom</td><td>quantity</td></tr>
+			<tr><td>103</td><td>100</td><td>0,340</td></tr>
+			<tr><td>103</td><td>101</td><td>0,100</td></tr>
+			<tr><td>103</td><td>102</td><td>0,080</td></tr>
+			<tr><td>103</td><td>103</td><td>0,100</td></tr>
+			<tr><td>101</td><td>105</td><td>0,300</td></tr>
+			<tr><td>101</td><td>106</td><td>3</td></tr>
+			<tr><td>101</td><td>107</td><td>0,150</td></tr>
+		</table>	
+	</div>
+	<div class="g">
+		<p align="center">
+		Menu<br>
+			<input type="button" value="Table1" onclick="show(0)">
+			<input type="button" value="Table2" onclick="show(1)">
+			<input type="button" value="Table3" onclick="show(2)">
+		</p>	
+	</div>
+
+	<div class="h">
+		Copyright???	
+	</div>
+
+
+</body>
+</html>
