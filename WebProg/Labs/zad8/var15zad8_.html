@@ -88,7 +88,6 @@ function f(file,file2)
 	{
 		newEl.setAttribute("id","tab3");	
 	}
-	//newEl.setAttribute("id","tab");
 
 	newEl1 = document.createElement('form');
 	newEl1.setAttribute("id","form1");
@@ -181,6 +180,7 @@ function f2(file,file2)
 				var c1=document.getElementById("dish");
 				var t=document.getElementById("tab2");
 				var r=t.getElementsByTagName("tr");
+				alert(x2.length);
 				for (var j=1; j < r.length; j++)
 					{
 						var d=r[j].getElementsByTagName("td");
@@ -198,6 +198,12 @@ function f2(file,file2)
 					d=document.createElement('td');
 					d.innerHTML=c1.value;
 					r.appendChild(d);
+			//x2[r.length]= new Array(c0,c1);
+			x2.push(new Array(c0,c1));
+			//x2=x2.concat([[c0.value,c1.value]]);
+			//x2+=[[c0.value,c1.value]];
+			//alert(x2[r.length][0].value);
+			alert(x2.length);
 					
 			}
 
@@ -447,7 +453,6 @@ function f2(file,file2)
 				}
 			}
 		}
-
 </script>
 
 </head>
