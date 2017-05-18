@@ -19,6 +19,7 @@ public:
 	void UnSwap();
 	bool isSwappable(int source_x,int source_y);
 	vector<int> FindZero();
+	bool isFinished();
 //////////////////////////////////////////////////////////////////////////
 	deque<int> _seq;
 	int SeqSize(){return _seq.size();}
@@ -340,6 +341,29 @@ std::vector<int> Field::FindZero()
 		vector<int> v;// v.resize(2);
 		v.push_back(g);	v.push_back(l);
 		return v;
+	}
+
+bool Field::isFinished()
+	{
+		if(_arr[_size-1][_size-1] == 0)
+			{
+			int val=1;
+			for(int i=0; i<_size; i++)
+				for(int j=0; j<_size;j++)
+					{
+					if(_arr[i][j]==0)
+						{
+						return true;
+						}
+					else if(_arr[i][j]!=val)
+						return false;
+					val++;
+					}
+			}
+		else
+			{
+			return false;
+			}
 	}
 
 void Field::GetSeq()
