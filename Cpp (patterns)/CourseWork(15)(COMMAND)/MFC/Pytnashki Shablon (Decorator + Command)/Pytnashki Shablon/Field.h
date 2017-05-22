@@ -15,7 +15,6 @@ class Field
 	int GetSize(){return _size;};
 	int ** GetArr(){return _arr;};
 	void Shake();
-	void Print();
 	void Swap(int source_x,int source_y);
 	void UnSwap();
 	bool isSwappable(int source_x,int source_y);
@@ -24,7 +23,6 @@ class Field
 //////////////////////////////////////////////////////////////////////////
 	vector<int> _seq;
 	int SeqSize(){return _seq.size();}
-	void GetSeq();
 //////////////////////////////////////////////////////////////////////////
 };
 
@@ -271,30 +269,16 @@ void Field::Shake()
 	}
 	/////////////////////////////////////////////////////////////////////////
 	vector<int> v = FindZero();
-	//_seq.push_back(v.front());_seq.push_back(v.back());
-	//return _arr;
 	}
 
-void Field::Print()
-	{
-	for (int i=0;i<_size;i++)
-		{
-		for (int j=0;j<_size;j++)
-			cout << _arr[i][j] << "  ";
-		cout << endl;
-		}
-	}
 
 void Field::Swap(int source_x,int source_y)
 	{
 	if(isSwappable(source_x,source_y))
 		{
 			vector<int> v = FindZero();
-			//cout << "---ZERO: " << v.front() <<" " << v.back() << " ---" << endl;
 			_arr[v.front()][v.back()]=_arr[source_x][source_y];
 			_arr[source_x][source_y]=0;
-			//////////////////////////////////////////////////////////////////////////
-			//_seq.push_back(source_x);_seq.push_back(source_y);
 			_seq.push_back(v.front());_seq.push_back(v.back());
 		}
 	}
@@ -303,12 +287,9 @@ void Field::Swap(int source_x,int source_y)
 void Field::UnSwap()
 	{
 		int a=_seq[SeqSize()-2],b=_seq[SeqSize()-1];
-		cout << "---UNDO--COORDS-- " << endl;
-		cout << a <<" "  << b <<endl;
 		Swap(a,b);
 		_seq.pop_back();_seq.pop_back();
 		_seq.pop_back();_seq.pop_back();
-		GetSeq();
 	}
 
 bool Field::isSwappable(int source_x,int source_y)
@@ -323,7 +304,6 @@ bool Field::isSwappable(int source_x,int source_y)
 			}
 		else
 			{
-			cout << "Illegal Move" << endl;
 			return false;
 			}
 			
@@ -365,12 +345,4 @@ bool Field::isFinished()
 			{
 			return false;
 			}
-	}
-
-void Field::GetSeq()
-	{
-		cout << "---SEQ---" << endl;
-		for(int i=0;i<_seq.size();i+=2)
-			cout << "(" <<	_seq[i] + 1 << "," << _seq[i+1] + 1 << ") ";
-		cout << endl << "---SEQ---" << endl;
 	}

@@ -1,4 +1,5 @@
 
+
 // Pytnashki ShablonView.cpp : реализация класса CPytnashkiShablonView
 //
 
@@ -22,9 +23,6 @@ CString menuMode;
 bool wasStartGame = false;
 int moveCount = 0;
 
-/*
-time_t myTimer;
-time_t timer1;*/
 
 //////////////////////////////////////////////////////////////////////////
 Reciever r;
@@ -308,41 +306,26 @@ void CPytnashkiShablonView::OnLButtonDown(UINT nFlags, CPoint point)
 		{
 			menuMode = "Menu Hide";
 			r=Reciever(2);
-			/*r.GetArrSize() = 2;
-			r.GetArr() = CreateFullr.GetArr()sive(r.GetArrSize());
-			Peremeshatr.GetArr()sive(r.GetArr(), r.GetArrSize());*/
 		}
 		else if(point.x>200 && point.x<500 && point.y>200 && point.y<250)
 		{
 			menuMode = "Menu Hide";
 			r=Reciever(3);
-			/*r.GetArrSize() = 3;
-			r.GetArr() = CreateFullr.GetArr()sive(r.GetArrSize());
-			Peremeshatr.GetArr()sive(r.GetArr(), r.GetArrSize());*/
 		}
 		else if(point.x>200 && point.x<600 && point.y>300 && point.y<350)
 		{
 			menuMode = "Menu Hide";
 			r=Reciever(4);
-			/*r.GetArrSize() = 4;
-			r.GetArr() = CreateFullr.GetArr()sive(r.GetArrSize());
-			Peremeshatr.GetArr()sive(r.GetArr(), r.GetArrSize());*/
 		}
 		else if(point.x>200 && point.x<700 && point.y>400 && point.y<450)
 		{
 			menuMode = "Menu Hide";
 			r=Reciever(5);
-			/*r.GetArrSize() = 5;
-			r.GetArr() = CreateFullr.GetArr()sive(r.GetArrSize());
-			Peremeshatr.GetArr()sive(r.GetArr(), r.GetArrSize())*/;
 		}
 		else if(point.x>200 && point.x<800 && point.y>500 && point.y<550)
 		{
 			menuMode = "Menu Hide";
 			r=Reciever(6);
-			/*r.GetArrSize() = 6;
-			r.GetArr() = CreateFullr.GetArr()sive(r.GetArrSize());
-			Peremeshatr.GetArr()sive(r.GetArr(), r.GetArrSize());*/
 		}
 	}
 	else if(menuMode == "Menu Hide")
@@ -356,6 +339,7 @@ void CPytnashkiShablonView::OnLButtonDown(UINT nFlags, CPoint point)
 				if((point.x>110*j+10) && (point.x<110*j+110) && (point.y>110*i+10) && (point.y<110*i+110))
 				{
 					r.Move(i,j);
+					moveCount++;
 				}
 			}
 		}
@@ -365,15 +349,10 @@ void CPytnashkiShablonView::OnLButtonDown(UINT nFlags, CPoint point)
 	{
 		wasStartGame = false;
 		CString s;
-		s.Format("%i", r.GetArrSize());
-		//r.Shake();
+		s.Format("%i", moveCount);
 		MessageBox("Вы победили!!\nКоличество ходов для победы: "+s);
 		menuMode = "Menu Open";
 	}
-	/*pDC->Rectangle(1000, 200, 1100, 250);
-	pDC->TextOutA(1010, 210, "<----------");
-	pDC->Rectangle(1200, 200, 1300, 250);
-	pDC->TextOutA(1210, 210, "---------->");*/
 
 	if(menuMode == "Menu Hide" && point.x>1000 && point.x<1100 && point.y>200 && point.y<250)
 		{
