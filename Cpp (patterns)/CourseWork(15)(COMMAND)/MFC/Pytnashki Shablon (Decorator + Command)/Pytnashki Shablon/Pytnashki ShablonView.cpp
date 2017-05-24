@@ -22,7 +22,7 @@
 CString menuMode;
 bool wasStartGame = false;
 int moveCount = 0;
-
+int style=0;
 
 //////////////////////////////////////////////////////////////////////////
 Reciever r;
@@ -67,12 +67,14 @@ public:
         virtual void operation(CDC * pDC) 
 		{
 			m_component->operation();
-			pDC->Rectangle(1200, 100, 1300, 150);
-			pDC->TextOutA(1210, 110, "Меню");
-			pDC->Rectangle(1200, 200, 1350, 250);	
-			pDC->TextOutA(1210, 210, "Новая игра");
-			pDC->Rectangle(1200, 300, 1400, 350);
-			pDC->TextOutA(1210, 310, "Выход");
+			pDC->Rectangle(1100, 100, 1200, 150);
+			pDC->TextOutA(1110, 110, "Меню");
+			pDC->Rectangle(1100, 200, 1250, 250);	
+			pDC->TextOutA(1110, 210, "Новая игра");
+			pDC->Rectangle(1100, 300, 1300, 350);
+			pDC->TextOutA(1110, 310, "Выбор стиля");
+			pDC->Rectangle(1100, 400, 1350, 450);
+			pDC->TextOutA(1110, 410, "Выход");
         }
 };
  
@@ -148,6 +150,73 @@ public:
 };
 
 
+class DecoratorFour : public IComponent 
+{
+        std::shared_ptr<IComponent> m_component;
+ 
+public:
+        DecoratorFour(std::shared_ptr<IComponent> component): m_component(component) {}
+		 virtual void operation() {}
+        virtual void operation(CDC *pDC) 
+		{
+                m_component->operation();
+				pDC->Rectangle(200, 100, 600, 150);
+				pDC->TextOutA(210, 110, "Просто белые квадратики");
+				pDC->Rectangle(200, 200, 700, 250);
+				pDC->TextOutA(210, 210, "Обычные белые кружочки");
+        }
+};
+
+class DecoratorFive : public IComponent 
+{
+        std::shared_ptr<IComponent> m_component;
+ 
+public:
+        DecoratorFive(std::shared_ptr<IComponent> component): m_component(component) {}
+		 virtual void operation() {}
+        virtual void operation(CDC *pDC) 
+		{
+                m_component->operation();
+				pDC->Rectangle(1200, 100, 1300, 150);
+				pDC->TextOutA(1210, 110, "Меню");
+
+				pDC->Rectangle(1000, 200, 1100, 250);
+				pDC->TextOutA(1010, 210, "<----------");
+				pDC->Rectangle(1200, 200, 1300, 250);
+				pDC->TextOutA(1210, 210, "---------->");
+
+				CString s;
+				s.Format("%i", moveCount);
+				pDC->Rectangle(1200, 300, 1380, 370);
+				pDC->TextOutA(1210, 310, "Количество ходов:");
+				pDC->TextOutA(1240, 340, s);
+
+				CBrush myBrush(RGB(55, 155, 255));
+				RECT rect;
+				rect.top = 0;
+				rect.left = 0;
+				rect.bottom=10+110*r.GetArrSize();
+				rect.right = 10+110*r.GetArrSize();
+				pDC->FillRect(&rect, &myBrush);
+				//**********Рисование массива******************
+				for(int i=0;i<r.GetArrSize(); i++)
+				{
+					for(int j=0;j<r.GetArrSize();j++)
+					{
+						if(r.GetArr()[j][i]!=0)
+						{
+							pDC->Ellipse(110*i+10, 110*j+10, 110*i+110, 110*j+110);
+							//pDC->Rectangle(110*i+10, 110*j+10, 110*i+110, 110*j+110);
+							CString s;
+							s.Format("%i", r.GetArr()[j][i]);
+							pDC->TextOutA(110*i+50, 110*j+50, s);
+						}
+					}
+				}
+        }
+};
+
+
 
 // CPytnashkiShablonView
 
@@ -208,11 +277,29 @@ void MenuFunction(CDC *pDC)
 	//*************Кнопка "выход"*********
 	else if(menuMode == "Menu Hide")
 	{
-		Component* pCompObj = new Component();
-		DecoratorThree* pDecThree= new DecoratorThree((std::shared_ptr<IComponent>) pCompObj);
-		pDecThree->operation(pDC);
+		if(style == 0)
+		{
+			Component* pCompObj = new Component();
+			DecoratorThree* pDecThree= new DecoratorThree((std::shared_ptr<IComponent>) pCompObj);
+			pDecThree->operation(pDC);
+		}
+		else if(style == 1)
+		{
+			Component* pCompObj = new Component();
+			DecoratorFive* pDecFive= new DecoratorFive((std::shared_ptr<IComponent>) pCompObj);
+			pDecFive->operation(pDC);
+		}
 	}
 	//*************************************
+	//*************Выбор стиля"*********
+	else if(menuMode == "Menu Style")
+	{
+		Component* pCompObj = new Component();
+		DecoratorFour* pDecFour= new DecoratorFour((std::shared_ptr<IComponent>) pCompObj);
+		pDecFour->operation(pDC);
+	}
+	//*
+
 }
 
 // рисование CPytnashkiShablonView
@@ -287,16 +374,20 @@ void CPytnashkiShablonView::OnLButtonDown(UINT nFlags, CPoint point)
 	CView::OnLButtonDown(nFlags, point);
 	if(menuMode == "Menu Open")
 	{
-		if(point.x>1200 && point.x<1300 && point.y>100 && point.y<150 && !wasStartGame)
+		if(point.x>1100 && point.x<1200 && point.y>100 && point.y<150 && !wasStartGame)
 			MessageBox("Я хочу сыграть с тобой в одну игру!");
-		else if(point.x>1200 && point.x<1300 && point.y>100 && point.y<150)
+		else if(point.x>1100 && point.x<1200 && point.y>100 && point.y<150)
 			menuMode = "Menu Hide";
-		else if(point.x>1200 && point.x<1350 && point.y>200 && point.y<250)
+		else if(point.x>1100 && point.x<1250 && point.y>200 && point.y<250)
 		{
 			menuMode = "Menu NG";
 			moveCount = 0;
 		}
-		else if(point.x>1200 && point.x<1265 && point.y>500 && point.y<530)
+		else if(point.x>1100 && point.x<1300 && point.y>300 && point.y<350)
+		{
+			menuMode = "Menu Style";
+		}
+		else if(point.x>1100 && point.x<1350 && point.y>400 && point.y<450)
 			ExitButtonClick();
 	}
 	else if(menuMode == "Menu NG")
@@ -326,6 +417,19 @@ void CPytnashkiShablonView::OnLButtonDown(UINT nFlags, CPoint point)
 		{
 			menuMode = "Menu Hide";
 			r=Reciever(6);
+		}
+	}
+	else if(menuMode == "Menu Style")
+	{
+		if(point.x>200 && point.x<600 && point.y>100 && point.y<150)
+		{
+			menuMode = "Menu Open";
+			style = 0;
+		}
+		else if(point.x>200 && point.x<700 && point.y>200 && point.y<250)
+		{
+			menuMode = "Menu Open";
+			style = 1;
 		}
 	}
 	else if(menuMode == "Menu Hide")
@@ -360,7 +464,8 @@ void CPytnashkiShablonView::OnLButtonDown(UINT nFlags, CPoint point)
 			  MessageBox("Nothing to undo!!!");
 			else
 				{
-				r.Undo();Invalidate();
+					r.Undo();Invalidate();
+					moveCount++;
 				}	
 		}
 		
@@ -370,7 +475,8 @@ void CPytnashkiShablonView::OnLButtonDown(UINT nFlags, CPoint point)
 				MessageBox("Nothing to redo!!!");
 			else
 				{
-				r.Redo();Invalidate();
+					r.Redo();Invalidate();
+					moveCount++;
 				}
 		}
 		

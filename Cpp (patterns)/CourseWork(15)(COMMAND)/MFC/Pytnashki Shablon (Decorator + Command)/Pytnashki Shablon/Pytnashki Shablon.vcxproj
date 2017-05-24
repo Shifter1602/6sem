@@ -94,7 +94,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram3.cd" />
     <None Include="Pytnashki Shablon.reg" />
     <None Include="ReadMe.txt" />
     <None Include="res\Pytnashki Shablon.ico" />

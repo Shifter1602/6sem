@@ -1,10 +1,9 @@
 #include "Field.h"
 class Command
 	{
-	public:
-	//protected:
+	protected:
 		Field * _field;
-	//public:
+	public:
 		virtual void Execute()=0;
 		virtual void UnExecute()=0;
 		void SetField(Field* field){_field=field;}
@@ -26,7 +25,6 @@ class Reciever
 	vector<Command*> UndoCommands; 
 	Field field; 
 	Command* command;
-//public:
 	Reciever(){}
 	Reciever(int size);
 	int ** GetArr(){return field.GetArr();};
