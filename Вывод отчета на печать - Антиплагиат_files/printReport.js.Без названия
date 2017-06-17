@@ -1,0 +1,28 @@
+﻿$(document).ready(function() {
+
+    $.plot('#pie-grafic', data, {
+        series: {
+            pie: {
+                innerRadius: 0.25,
+                show: true,
+                startAngle: 1.2,
+                label: {
+                    show: false
+                }
+                
+            }
+        },
+        legend: {
+            show: false
+        },
+
+    });
+ 
+   
+    $('.footnote').click(function (e) {
+        e.preventDefault();
+    });
+
+
+});
+
